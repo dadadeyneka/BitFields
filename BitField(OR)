@@ -20,8 +20,37 @@ class BitField
   void show();
   friend ostream& operator<<(ostream& os, BitField & a); //print to stream
   friend istream& operator>>(istream& os, BitField & a); //read from string 
-  int getBit(int BitNumber);
+
   int setBit(int BitNumber, int bit);
+  int getBit(int BitNumber);
+
+  
+}
+long BitField::getData()
+        {return data;}
+        void BitField::setData(long newData)
+        {data=newData;}
+
+char BitField::getBit (int bitNumber)
+{long z = data>>bitNumber;
+  return z&1;}
+BitField::BitField(long newData)
+{data=newData;}
+BitField::BitField(const BitField &x)
+{data=x.data;}
+BitField::BitField()
+{data=0;}
+BitField::~BitField()
+{}
+void BitField::show()
+{for(int i=0; i<32; i++)
+{cout<<(int) getBit(i);}}
+BitField operator&(BitField &a, BitField &b)
+{BitField c;
+long x=a.getData();
+long y=b.getData();
+c.setData(x&y);
+return c;
 }
 BitField::BitField(long new Data);
 {data=new Data;}
